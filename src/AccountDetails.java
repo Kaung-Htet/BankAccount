@@ -1,11 +1,45 @@
 public class AccountDetails {
-    private int accountNumber;
+    private String accountNumber;
     private double balance;
     private String name;
     private String email;
-    private int phoneNumber;
+    private String phoneNumber;
 
-    public int getAccountNumber() {
+    //ဒါက default constructor လို့ခေါ်တယ်
+    //empty constructor ကိုခေါ်တဲ့အချိန်မှာ သုံးတယ်
+    public AccountDetails(){
+        //this keyword က ဒီ constructor ကနေ တခြား constructor ကိုယူသုံးတာ
+        //this keyword စာကြောင်းက ဒီ code block ထဲမှာ အားလုံးထက် ပထမဦးဆုံးစာကြောင်းမှာရှိရမယ်
+        //မဟုတ်ရင် error ပြလိမ့်မယ်
+        this ("5678", 300, "Default Name", "Default Email", "Default Phone Number");
+        System.out.println("Empty constructor called");
+    }
+
+    //constructor က access modifier နဲ့ class name ပဲနာမည်ပေးရတယ်
+    public AccountDetails (String accountNumber, double balance, String name, String email, String phoneNumber){
+        System.out.println("Account constructor with parameters called");
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void deposit (double depositAmount){
+        this.balance += depositAmount;
+        System.out.println("Deposit of " + depositAmount + " made. New balance is " + this.balance);
+    }
+
+    public void withdrawal (double withdrawalAmount){
+        if ((this.balance - withdrawalAmount) < 0){
+            System.out.println("Only " + this.balance + " available. Withdrawal not processed");
+        } else {
+            this.balance -= withdrawalAmount;
+            System.out.println("Withdrawal of " + withdrawalAmount + " processed. Remaining balance = " + balance);
+        }
+    }
+
+    public String getAccountNumber() {
         return this.accountNumber;
     }
 
@@ -21,11 +55,11 @@ public class AccountDetails {
         return this.email;
     }
 
-    public int getPhoneNumber(){
+    public String getPhoneNumber(){
         return this.phoneNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -41,30 +75,11 @@ public class AccountDetails {
         this.email = email;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public double depositFunds (double depositMoney){
-        System.out.println("Your deposited money = " + depositMoney);
-        double balance = getBalance() + depositMoney;
-        setBalance(balance);
-        System.out.print("Your final balance now = " );
-        return getBalance();
-    }
-
-    public double withdrawFunds (double withdrawal){
-        if (withdrawal > getBalance()){
-            System.out.println("Oops your balance ( " + getBalance() + " ) is insufficient");
-        } else {
-            System.out.println("Your withdrawal = " + withdrawal);
-            double balance = getBalance() - withdrawal;
-            setBalance(balance);
-        }
-
-        System.out.print("Your final balance now = " );
-        return getBalance();
-    }
+    
 }
 
 // Create a new class for bank account
