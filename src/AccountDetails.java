@@ -52,6 +52,19 @@ public class AccountDetails {
         System.out.print("Your final balance now = " );
         return getBalance();
     }
+
+    public double withdrawFunds (double withdrawal){
+        if (withdrawal > getBalance()){
+            System.out.println("Oops your balance ( " + getBalance() + " ) is insufficient");
+        } else {
+            System.out.println("Your withdrawal = " + withdrawal);
+            double balance = getBalance() - withdrawal;
+            setBalance(balance);
+        }
+
+        System.out.print("Your final balance now = " );
+        return getBalance();
+    }
 }
 
 // Create a new class for bank account
